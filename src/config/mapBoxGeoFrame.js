@@ -1,5 +1,6 @@
 const axios=require('axios');
 require('dotenv').config();
+const cheerio = require('cheerio');
 
 
 const mapboxAccessToken = process.env.MAPBOX_ACCESS_TOKEN
@@ -125,4 +126,56 @@ const fetchCountryDetail = async (countryName) => {
         return [];
     }
   }
-module.exports = {mapBoxApi, fetchCountryList,poiData, fetchCountriesStates,fetchCountryDetail}
+
+
+
+  async function fetchAdministrativeDivisions(country) {
+    try {
+        const encodedCountryName = encodeURIComponent(country);
+    const url = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=links&titles=List_of_administrative_divisions_of_${encodedCountryName}&pllimit=max`;
+
+    const response = await axios.get(url);
+    const pages = response.data.query.pages;
+
+    if (pages) {
+      const page = Object.values(pages)[0];
+      const links = page.links || [];
+
+      const divisions = links.map(link => link.title);
+
+      console.log(`Administrative Divisions of ${country}:`);
+      divisions.forEach((division, index) => {
+        console.log(`${index + 1}. ${division}`);
+      });
+    } else {
+      console.log(`No data found for ${country}`);
+    }
+        // const url = `https://en.wikipedia.org/w/api.php`;
+        // const params = {
+        //     action: 'query',
+        //     format: 'json',
+        //     prop: 'extracts',
+        //     titles: `Administrative divisions of ${country}`,
+        //     redirects: 1,
+        //     exintro: 1,
+        //     explaintext: 1,
+        // };const response = await axios.get(url, { params });
+
+        // const pages = response.data.query.pages;
+        // const pageId = Object.keys(pages)[0];
+        // const extract = pages[pageId].extract;
+
+        // if (extract) {
+        //     console.log(`Administrative divisions of ${country}:\n`);
+        //     console.log(extract);
+        //     return extract
+        // } else {
+        //     console.log(`No information found for ${country}`);
+        // }
+
+    } catch (error) {
+        console.error('Error fetching data from Wikipedia:', error);
+    }
+}
+
+module.exports = {mapBoxApi, fetchCountryList,poiData, fetchCountriesStates,fetchAdministrativeDivisions, fetchCountryDetail}

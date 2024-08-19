@@ -3,11 +3,7 @@ import React from 'react'
 function Userlist() {
   return (
    <div>
-    {/*
-  Heads up! 👋
-
-  This component comes with some `rtl` classes. Please remove them if they are not needed in your project.
-*/}
+   
 
 <div className="overflow-x-auto">
   <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">

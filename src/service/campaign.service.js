@@ -1,10 +1,10 @@
 const csvFileData = require('../config/csvWriter');
-const {mapBoxApi,fetchCountryList,poiData,fetchCountriesStates,fetchCountryDetail} = require('../config/mapBoxGeoFrame');
+const {mapBoxApi,fetchCountryList,extractAdministrativeDivisions,poiData,fetchCountriesStates,fetchCountryDetail, fetchAdministrativeDivisions} = require('../config/mapBoxGeoFrame');
 const { Campaign } = require('../model/campaign.model');
 const createCampaign=async function(req,res){
 try {
-        let { name, country,state,district,city,dmas,postalCode } = req.body;
-        let newUser= new Campaign({ name:name,country,city,postalCode,dmas,district,state });
+        let { name} = req.body;
+        let newUser= new Campaign({ name:name});
         
           const savedUser = await newUser.save();
           console.log(`saved Campaign ${JSON.stringify(savedUser)}`);
@@ -15,7 +15,6 @@ try {
 } 
 }
  
-  
   
 const getCampaign= async function(req, res)  {
   
@@ -159,6 +158,9 @@ const updateCampaign= async function(req, res)  {
   }
 };
 
+
+
+  
 const deleteCampaign=async (req, res) => {
   const { id } = req.params;
   try {
@@ -172,6 +174,28 @@ const deleteCampaign=async (req, res) => {
   }}
 
 
-
   
-module.exports={createCampaign,getPOI, getAllCampaign,getCampaign,getCountriesState,getCountryDetails, getCountryList,updateCampaign,deleteCampaign,getGeoFrameData}
+const getDivisionData= async function(req, res)  {
+  
+  try {
+   const countryName=req.params.country
+    const user = await fetchAdministrativeDivisions(countryName)
+    console.log(`list==== ${JSON.stringify(user)}`);
+    //const csvdata=await csvFileData(user)
+    //console.log(`success csv file`);
+  
+    if (!user) {
+      return res.status(404).send({ message: 'Geo frame not found' });
+    }
+  
+          res.status(201).send({message:"sucessfully fetched",data:user});
+       
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
+
+
+
+module.exports={createCampaign,getPOI, getAllCampaign,getCampaign, getDivisionData,getCountriesState,getCountryDetails, getCountryList,updateCampaign,deleteCampaign,getGeoFrameData}

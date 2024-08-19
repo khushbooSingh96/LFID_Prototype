@@ -3,12 +3,11 @@ const mongoose=require('mongoose');
 const poiSchema=new mongoose.Schema({
     showOnMap:{type:Boolean},
  createdAt:{type:String,default:Date.now()},
- country:{type:String},
- state:{type:String},
- city:{type:String},
- district:{type:String},
- dmas:{type:String},
- postalCode:{type:String},
+ categories:[{type:String}],
+ onlyWithGeoFrame:{type:Boolean},
+ csvFileUrl:{type:String},
+ geoFrame:{type:mongoose.Schema.Types.ObjectId,ref:""},
+ campaignId:{type:mongoose.Schema.Types.ObjectId, ref:"Campaign"},
  status:{type:String, default:"Active", enum:['Active','Inactive']},
 },{timestamps:true});
 

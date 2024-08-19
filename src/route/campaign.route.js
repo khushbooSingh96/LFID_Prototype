@@ -57,4 +57,10 @@ route.delete('/campaign/deleteById/:id',(req,res)=>{
 
 
 
+route.get('/campaign/getDivisionData/:country',(req,res)=>{
+    campaignController.getDivisionData(req,res)
+})
+
+
+
 module.exports=route

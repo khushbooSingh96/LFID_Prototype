@@ -93,4 +93,14 @@ const deleteCampaign=async function(req,res){
 
 
 
-module.exports={createCampaign,getCampaign,getPOI,  getCountriesState,getCountryDetails, updateCampaign,deleteCampaign,getCountryList, getAllCampaign, getGeoFrameData}
+const getDivisionData=async function(req,res){
+    try {
+        return campaignService.getDivisionData(req,res);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+
+
+
+module.exports={createCampaign,getCampaign,getPOI, getDivisionData, getCountriesState,getCountryDetails, updateCampaign,deleteCampaign,getCountryList, getAllCampaign, getGeoFrameData}

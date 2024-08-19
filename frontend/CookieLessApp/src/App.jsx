@@ -9,6 +9,7 @@ import {BrowserRouter, Route, Routes, useNavigate} from 'react-router-dom'
 import Dashboard from './components/Dashboard'
 import Profile from './components/Profile'
 import Header from './components/Header'
+import Campaign from './components/campaign'
 function App() {
   const [count, setCount] = useState(0)
 
@@ -22,6 +23,8 @@ function App() {
 <Route path='/user-list' element={<Userlist />}/>
 <Route path='/dashboard' element={<Dashboard />} />
 <Route path='/profile' element={<Profile />} />
+<Route path='/campaign' element={<Campaign />} />
+
 
 
 
