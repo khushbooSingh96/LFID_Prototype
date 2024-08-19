@@ -38,6 +38,7 @@ const getPOIList= async function(req, res)  {
 const getPOI= async function(req, res)  {
   
   try {
+    const {id}=req.params
   const poiResult=await POI.findById(id); 
     console.log(`state === ${poiResult}`);
     if (!poiResult) {
@@ -53,10 +54,10 @@ const getPOI= async function(req, res)  {
   
   
 const updatePOI= async function(req, res)  {
-  const {showOnMap,country,onlyWithGeoFrame} = req.body;
+  const {showOnMap,categories,onlyWithGeoFrame,id,campaignId} = req.body;
   if(!id)res.status(400).json({message:"Please enter Id"})
   try {
-    const user = await POI.findByIdAndUpdate(id,{country,onlyWithGeoFrame,showOnMap});
+    const user = await POI.findByIdAndUpdate(id,{categories,campaignId,onlyWithGeoFrame,showOnMap});
     if (!user) {
       return res.status(404).json({ message: 'POI not found' });
     }
