@@ -1,2 +1,29 @@
 node_modules
 .env
+
+
+
+# Logs
+frontend/frontendPrototype/logs
+frontend/frontendPrototype/*.log
+frontend/frontendPrototype/npm-debug.log*
+frontend/frontendPrototype/yarn-debug.log*
+frontend/frontendPrototype/yarn-error.log*
+frontend/frontendPrototype/pnpm-debug.log*
+frontend/frontendPrototype/lerna-debug.log*
+
+frontend/frontendPrototype/node_modules
+frontend/frontendPrototype/dist
+frontend/frontendPrototype/dist-ssr
+frontend/frontendPrototype/*.local
+
+# Editor directories and files
+frontend/frontendPrototype/.vscode/*
+frontend/frontendPrototype/!.vscode/extensions.json
+frontend/frontendPrototype/.idea
+frontend/frontendPrototype/.DS_Store
+frontend/frontendPrototype/*.suo
+frontend/frontendPrototype/*.ntvs*
+frontend/frontendPrototype/*.njsproj
+frontend/frontendPrototype/*.sln
+frontend/frontendPrototype/*.sw?

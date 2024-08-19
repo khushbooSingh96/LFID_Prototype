@@ -11,7 +11,7 @@ import Profile from './components/Profile'
 import Header from './components/Header'
 import Campaign from './components/campaign'
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <BrowserRouter>
@@ -30,7 +30,7 @@ function App() {
 
 </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;
